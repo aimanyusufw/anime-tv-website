@@ -17,3 +17,15 @@
   border-radius: 10px;
   background-color: #888;
 }
+
+.btn {
+  @apply px-4 py-2 rounded-md font-semibold;
+}
+
+.btn-primary {
+  @apply bg-blue-500 text-white hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply bg-gray-500 text-white hover:bg-gray-700;
+}

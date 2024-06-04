@@ -1,53 +1,53 @@
 import Image from "next/image";
+import { MdLayers } from "react-icons/md";
+import { FaRegStar } from "react-icons/fa";
 import React from "react";
+import Link from "next/link";
 
-const AnimeCard = ({ data }) => {
+const AnimeCard = ({ data, main_url }) => {
   return (
-    <div className="max-w-sm rounded relative w-full">
-      <div className="relative w-full h-[37vh]">
-        <Image
-          src={data.images.webp.image_url}
-          alt={data.title}
-          fill
-          className="rounded-xl"
-        />
-      </div>
-      <div className="py-4 flex flex-col gap-3">
-        <div className="flex justify-between items-center gap-1">
-          <h2 className="font-bold text-white text-xl line-clamp-1 w-full">
-            {anime.name}
-          </h2>
-          <div className="py-1 px-2 bg-[#161921] rounded-sm">
-            <p className="text-white text-sm font-bold capitalize">
-              {anime.kind}
-            </p>
-          </div>
+    <div className="rounded relative w-full" key={data.animeMalId}>
+      <Link href={`${main_url}/${data.mal_id || data.animeMalId}`}>
+        <div className="relative w-full h-64">
+          <Image
+            src={data.images?.webp.image_url || data.image}
+            alt={data.title}
+            fill
+            sizes="large"
+            className="rounded-xl"
+          />
         </div>
-        <div className="flex gap-4 items-center">
-          <div className="flex flex-row gap-2 items-center">
-            <Image
-              src="./episodes.svg"
-              alt="episodes"
-              width={20}
-              height={20}
-              className="object-contain"
-            />
-            <p className="text-base text-white font-bold">
-              {anime.episodes || anime.episodes_aired}
-            </p>
+        <div className="py-4 flex flex-col gap-3">
+          <div className="flex justify-between items-center gap-1">
+            <h2 className="font-bold text-white text-xl truncate w-full">
+              {data.title}
+            </h2>
+            <div className="py-1 px-2 bg-[#161921] rounded-sm">
+              <p className="text-white text-sm font-bold capitalize">
+                {data.type ? data.type : "TV"}
+              </p>
+            </div>
           </div>
-          <div className="flex flex-row gap-2 items-center">
-            <Image
-              src="./star.svg"
-              alt="star"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <p className="text-base font-bold text-[#FFAD49]">{anime.score}</p>
-          </div>
+          {data.episodes ? (
+            <div className="flex gap-4 items-center">
+              <div className="flex flex-row gap-2 items-center">
+                <MdLayers className="text-primary" />
+                <p className="text-base text-white font-bold">
+                  {data.episodes || data.episodes_aired}
+                </p>
+              </div>
+              <div className="flex flex-row gap-2 items-center">
+                <FaRegStar className="text-[#FFAD49]" />
+                <p className="text-base font-bold text-[#FFAD49]">
+                  {data.score}
+                </p>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

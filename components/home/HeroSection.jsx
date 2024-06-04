@@ -10,7 +10,7 @@ const HeroSection = async ({ api }) => {
   return (
     <>
       <section
-        className="h-[70vh] w-full relative bg-cover flex justify-center items-center"
+        className="h-screen md:h-[70vh] w-full relative bg-cover flex justify-center items-center bg-center"
         style={styling}
       >
         <div className="bg-black -z-1 absolute top-0 right-0 left-0 bottom-0 bg opacity-50"></div>
@@ -25,9 +25,11 @@ const HeroSection = async ({ api }) => {
             <h5 className="text-xs md:text-sm mb-3">
               {`${api.aired.string} ·  ${api.duration}`}
             </h5>
-            <h1 className="text-4xl md:text-6xl font-bold max-w-3xl mb-10 leading-relaxed">
-              {api.title}
-            </h1>
+            <Link href={`/anime/${api.mal_id}`}>
+              <h1 className="text-4xl md:text-6xl font-bold max-w-3xl mb-10 leading-relaxed">
+                {api.title}
+              </h1>
+            </Link>
             <Link
               href={api.trailer.url ? api.trailer.url : ""}
               target="_blank"

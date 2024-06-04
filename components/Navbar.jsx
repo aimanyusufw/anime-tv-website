@@ -1,58 +1,42 @@
-"use client";
-
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React from "react";
+import SearchInput from "./Input/SearchInput";
+import { authUserSession } from "@/lib/user-data-lib";
+import Image from "next/image";
+import { CiSearch } from "react-icons/ci";
+import LoginModal from "./modal/LoginModal";
 
-const Navbar = () => {
-  const pathName = usePathname();
+const Navbar = async () => {
+  const user = await authUserSession();
 
   return (
     <nav className="absolute top-0 right-0 left-0 z-50">
       <div className="container">
-        <div className="w-full px-4 flex justify-between py-7">
-          <Link href={"/"} className="font-semibold text-2xl">
-            ANIME.TV
+        <div className="w-full px-4 flex justify-between py-7 flex-wrap items-center">
+          <Link href={"/"} className="font-bold text-2xl mb-5 md:mb-0">
+            Anime Tv
           </Link>
-          <div className="hidden md:flex gap-5 md:gap-7 items-center">
+          <div className="flex gap-5 items-center">
             <Link
-              href={"/"}
-              className={`text-sm font-base ${
-                pathName === "/" ? "font-bold text-primary" : ""
-              }`}
+              href={"/search"}
+              className="md:hidden p-2 bg-black bg-opacity-50 rounded-full"
             >
-              Home
+              <CiSearch className="w-7 h-7" />
             </Link>
-            <Link
-              href={"/anime"}
-              className={`text-sm font-base ${
-                pathName === "/anime" ? "font-bold text-primary" : ""
-              }`}
-            >
-              Anime
-            </Link>
-            <Link
-              href={"/manga"}
-              className={`text-sm font-base ${
-                pathName === "/manga" ? "font-bold text-primary" : ""
-              }`}
-            >
-              Manga
-            </Link>
-            <Link
-              href={"/forums"}
-              className={`text-sm font-base ${
-                pathName === "/forums" ? "font-bold text-primary" : ""
-              }`}
-            >
-              Forums
-            </Link>
-            <Link
-              href={"/login"}
-              className="text-sm px-6 py-3 font-medium bg-primary rounded-full"
-            >
-              Login
-            </Link>
+            <SearchInput />
+            {user ? (
+              <Link href={"/user"}>
+                <Image
+                  src={user.image}
+                  alt={user.name}
+                  width={40}
+                  height={40}
+                  className="rounded-full border"
+                />
+              </Link>
+            ) : (
+              <LoginModal />
+            )}
           </div>
         </div>
       </div>
