@@ -10,13 +10,30 @@ import AddToCollectionButton from "@/components/utils/addToCollectionButton";
 import { authUserSession } from "@/lib/user-data-lib";
 import prisma from "@/lib/prisma";
 import CommentInput from "@/components/Input/CommentInput";
+import CommentList from "@/components/List/CommentList";
 
 const Page = async ({ params }) => {
   const anime = await fetchApi(`anime/${params.mal_id}`);
   const user = await authUserSession();
 
-  const apiData = {
-    animeMalId: anime.data.mal_id,
+  const animeMalId = anime.data.mal_id;
+
+  const allComents = await prisma.comment.findMany({
+    orderBy: [
+      {
+        id: "desc",
+      },
+    ],
+    where: {
+      animeMalId,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  const addCollectData = {
+    animeMalId,
     title: anime.data.title,
     image: anime.data.images.webp.image_url,
     episodes: anime.data.episodes,
@@ -44,7 +61,7 @@ const Page = async ({ params }) => {
               opts={{ width: "100%", height: "100%" }}
             />
             <div className="flex justify-between items-center">
-              <div className="w-full">
+              <div className="w-4/5">
                 <h1 className="mt-5 mb-3 font-semibold text-3xl truncate">
                   {anime.data.title}
                 </h1>
@@ -53,7 +70,7 @@ const Page = async ({ params }) => {
                   {anime.data.rank}
                 </span>
               </div>
-              {user?.id ? <AddToCollectionButton data={apiData} /> : ""}
+              {user?.id ? <AddToCollectionButton data={addCollectData} /> : ""}
             </div>
             <div className="flex gap-5 my-5">
               {anime.data.genres.map((data, i) => (
@@ -93,11 +110,16 @@ const Page = async ({ params }) => {
                 {anime.data.status}
               </div>
             </div>
-            <h3 className="font-medium mb-3">Synopsis :</h3>
+            <h3 className="font-bold text-xl mb-3">Synopsis :</h3>
             <p className="text-sm text-white mb-8 leading-relaxed">
               {anime.data.synopsis || "N/A"}
             </p>
-            <CommentInput />
+            <h1 className="font-bold text-xl mb-5">Reply :</h1>
+            <CommentList allComents={allComents} />
+            <CommentInput
+              animeMalId={anime.data.mal_id}
+              animeTitle={anime.data.title}
+            />
           </div>
         </div>
       )}

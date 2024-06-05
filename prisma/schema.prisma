@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -83,6 +83,7 @@ model Collection {
 
 model Comment {
   id         String @id @default(cuid())
+  animeTitle String
   animeMalId Int
   content    String
   userId     String

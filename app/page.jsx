@@ -1,5 +1,5 @@
+import AnimeList from "@/components/List/AnimeList";
 import AnimeCta from "@/components/card/AnimeCta";
-import AnimeList from "@/components/home/AnimeList";
 import HeroSection from "@/components/home/HeroSection";
 import { fetchApi, fetchNestedAnime } from "@/lib/api-lib";
 

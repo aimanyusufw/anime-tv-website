@@ -1,4 +1,6 @@
+import CommentList from "@/components/List/CommentList";
 import SignOutButton from "@/components/utils/SignOutButton";
+import prisma from "@/lib/prisma";
 import { authUserSession } from "@/lib/user-data-lib";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,11 +14,20 @@ export const metadata = {
 
 const Page = async () => {
   const user = await authUserSession();
+  const allComents = await prisma.comment.findMany({
+    orderBy: [{ id: "desc" }],
+    where: {
+      userId: user.id,
+    },
+    include: {
+      user: true,
+    },
+  });
 
   return (
     <section className="min-h-screen">
       <div className="container">
-        <div className="w-full md:w-1/2 mx-auto px-4 pt-32 mb-10 flex flex-col items-center">
+        <div className="w-full md:w-3/4 mx-auto px-4 pt-32 mb-10 ">
           <Image
             src={user.image}
             alt={user.name}
@@ -29,7 +40,7 @@ const Page = async () => {
             <MdAlternateEmail className="text-white w-5 h-5 inline me-1" />
             {user.email}
           </div>
-          <div className="flex  gap-3">
+          <div className="flex gap-3 justify-center mb-5">
             <SignOutButton />
             <Link
               href={"/user/collections"}
@@ -38,8 +49,13 @@ const Page = async () => {
               <FaBookmark className="w-5 h-5" />
             </Link>
           </div>
+          <h1 className="font-bold text-2xl text-center mb-5">All Replies :</h1>
+          <CommentList
+            allComents={allComents}
+            showAnimeTitle={true}
+            userId={user.id}
+          />
         </div>
-        <h1 className="font-bold text-2xl text-center">All Replies</h1>
       </div>
     </section>
   );

@@ -1,12 +1,10 @@
 "use client";
 
 import SearchInput from "@/components/Input/SearchInput";
-import AnimeList from "@/components/home/AnimeList";
+import AnimeList from "@/components/List/AnimeList";
 import { fetchApi } from "@/lib/api-lib";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { CiSearch } from "react-icons/ci";
 
 const Page = () => {
   const searchQuery = useSearchParams("query");
