@@ -1,6 +1,6 @@
 "use client";
 
-import AnimeList from "@/components/home/AnimeList";
+import AnimeList from "@/components/List/AnimeList";
 import Pagination from "@/components/utils/Pagination";
 import { fetchApi } from "@/lib/api-lib";
 import React, { useEffect, useState } from "react";
