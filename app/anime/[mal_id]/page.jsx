@@ -6,11 +6,11 @@ import { BiSolidCategory } from "react-icons/bi";
 import { GrStatusGoodSmall } from "react-icons/gr";
 import Link from "next/link";
 import BackButton from "@/components/utils/BackButton";
-import AddToCollectionButton from "@/components/utils/addToCollectionButton";
 import { authUserSession } from "@/lib/user-data-lib";
 import prisma from "@/lib/prisma";
 import CommentInput from "@/components/Input/CommentInput";
 import CommentList from "@/components/List/CommentList";
+import AddToCollectionButton from "@/components/utils/AddToCollectionButton";
 
 const Page = async ({ params }) => {
   const anime = await fetchApi(`anime/${params.mal_id}`);

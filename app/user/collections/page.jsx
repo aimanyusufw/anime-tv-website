@@ -34,7 +34,7 @@ const Page = async () => {
         ) : (
           <div className="w-full px-4 h-screen flex justify-center items-center">
             <h1 className="font-bold text-2xl max-w-64 mx-auto text-center">
-              You Don't Have Any Collections For Now.
+              You Don`&apos;`t Have Any Collections For Now.
             </h1>
           </div>
         )}
