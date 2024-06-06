@@ -116,10 +116,14 @@ const Page = async ({ params }) => {
             </p>
             <h1 className="font-bold text-xl mb-5">Reply :</h1>
             <CommentList allComents={allComents} />
-            <CommentInput
-              animeMalId={anime.data.mal_id}
-              animeTitle={anime.data.title}
-            />
+            {user?.id ? (
+              <CommentInput
+                animeMalId={anime.data.mal_id}
+                animeTitle={anime.data.title}
+              />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       )}
