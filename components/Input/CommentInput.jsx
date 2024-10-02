@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import { FaPaperPlane } from "react-icons/fa";
 
 const CommentInput = ({ animeMalId, animeTitle }) => {
@@ -38,9 +39,7 @@ const CommentInput = ({ animeMalId, animeTitle }) => {
   useEffect(() => {
     let timeoutId;
     if (isCreated) {
-      timeoutId = setTimeout(() => {
-        setIsCreated(false);
-      }, 5000);
+      toast.success("Your comment has been sent.!");
     }
 
     return () => {
@@ -51,11 +50,6 @@ const CommentInput = ({ animeMalId, animeTitle }) => {
 
   return (
     <div className="flex gap-2">
-      {isCreated && (
-        <span className="py-2 px-4 bg-black bg-opacity-80 text-white absolute bottom-0 left-1/2 transform -translate-x-1/2 rounded-md shadow-md">
-          Comment Terkirim
-        </span>
-      )}
       <div className="w-full">
         <input
           autoComplete="off"

@@ -16,17 +16,26 @@ const Footer = () => {
           </Link>
           <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
             <li>
-              <Link href="#" className="hover:underline me-4 md:me-6">
+              <Link
+                href="https://instagram.com/aimanyw_"
+                className="hover:underline me-4 md:me-6"
+              >
                 Instagram
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:underline me-4 md:me-6">
+              <Link
+                href="https://twitter.com/aimanyus_"
+                className="hover:underline me-4 md:me-6"
+              >
                 Twittwer
               </Link>
             </li>
             <li>
-              <Link href="#" className="hover:underline me-4 md:me-6">
+              <Link
+                href="https://aimanyusuf.site"
+                className="hover:underline me-4 md:me-6"
+              >
                 Website
               </Link>
             </li>

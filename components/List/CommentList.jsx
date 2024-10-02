@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { FaTrashAlt } from "react-icons/fa";
 
 const CommentList = ({ allComents, showAnimeTitle, userId }) => {
@@ -28,6 +29,7 @@ const CommentList = ({ allComents, showAnimeTitle, userId }) => {
 
     updatedLoading[index] = false;
     setLoading(updatedLoading);
+    toast.success("Comment successfully deleted");
     return router.refresh();
   };
 
