@@ -32,9 +32,6 @@ jobs:
       - name: Build assets
         run: npm run build
 
-      - name: Prisma migrate
-        run: npx prisma migrate deploy
-
       - name: 📂 Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:

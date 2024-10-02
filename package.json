@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js && npx prisma migrate deploy",
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
